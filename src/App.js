@@ -6,7 +6,7 @@ function App() {
     return (
       <div className='container'>
         <div className='App'>
-        <Weather/>
+        <Weather defaultcity="Lagos"/>
       <footer>
         This project is created by Oseyemi Dammy, is {}
         <a href='https://github.com/Dammy36/weather3-react'>Opensourced on Github</a> and { }
