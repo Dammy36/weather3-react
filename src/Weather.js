@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import "./weather.css";
 import axios from "axios"
-
+import FormattedDate from "./FormattedDate"
 
 export default function Weather(props) {
     
@@ -15,9 +15,9 @@ export default function Weather(props) {
             wind: response.data.wind.speed,
             city: response.data.city,
             humidity: response.data.temperature.humidity,
-            description: response.data.condition,
+            description:response.data.condition.description,
             iconUrl: "https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png",
-            date: "Wednesday 5:00"
+            date: new Date(response.data.time * 1000)
         });
        
     }
@@ -38,8 +38,10 @@ export default function Weather(props) {
                 </form>
          <h1>{weatherData.city }</h1>
             <ul>
-             <li>{weatherData.date }</li>
-             <li className="text-capitalize">{weatherData.description }</li>
+             <li>
+                <FormattedDate date = {weatherData.date} />
+                </li>
+             <li className="text-capitalize">{weatherData.description}</li>
             </ul>
             <div className="row mt-3">
                 <div className="col-sm-6"> 
@@ -57,8 +59,8 @@ export default function Weather(props) {
                 <div className="col-sm-6">
                     <ul>
                         <li>prescipition:15</li>
-                     <li>{weatherData.humidity }</li>
-                     <li>{weatherData.wind }</li>
+                     <li>Humidity:{weatherData.humidity }</li>
+                     <li>Wind:{weatherData.wind }</li>
                     </ul>
                     
                 </div>
@@ -67,12 +69,15 @@ export default function Weather(props) {
        </div>
     )
 
-    }else{
+    }
+    else {
     const apiKey = "ft2ff28777530dba3dddb311o0464bef"
 
     let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${props.defaultcity}&key=${apiKey}&units=metric`
-    axios.get(apiUrl).then(handleResponse)
-return "Loading..."
+        axios.get(apiUrl).then(handleResponse)
+        
+        return "Loading..."
+        
     }
    
 }
