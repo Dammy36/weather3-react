@@ -49,3 +49,8 @@ position: relative;
 top: -34px;
 line-height: 1;
 }
+
+.unit a {
+    text-decoration: none;
+}
+

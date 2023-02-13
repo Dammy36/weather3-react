@@ -1,4 +1,5 @@
 import React from "react"
+import Convention from "./Convention"
 import FormattedDate from "./FormattedDate"
 import Weathericon from "./Weathericon"
 
@@ -23,11 +24,10 @@ export default function Weatherinfo(props) {
                      
                     
                         <div className="float-left number">
-                            <div className="weather-temperature">
-                    <span className="temperature">{Math.round(props.data.temperature)}</span>
-                                <span className="unit">°C</span>
+                            <Convention celsius={props.data.temperature} />
+                               
                                 </div>
-                    </div>        
+                           
                        
                         
                 </div>
