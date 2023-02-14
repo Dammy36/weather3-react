@@ -15,7 +15,7 @@ export default function Weatherinfo(props) {
             </ul>
             <div className="row mt-3">
                 <div className="col-sm-6"> 
-                    <div className="clearfix">
+                    <div className="clearfix  d-flex">
 
                         <div className="float-left">
                             <Weathericon
