@@ -1,46 +1,33 @@
-import React, {useState} from "react"
-import Weathericon from "./Weathericon"
-import "./WeatherForecast.css"
-import axios from "axios";
+import React, { useState } from "react";
 
+import "./WeatherForecast.css";
+import axios from "axios";
+import WeatherForecastDay from "./WeatherForecastDay";
 
 export default function WeatherForecast(props) {
-    const [loaded, setLoaded] = useState(false);
+  let [loaded, setLoaded] = useState(false);
+  let [forecast, setForecast] = useState(null);
+  function handleResponse(response) {
+    setForecast(response.data.daily);
+    setLoaded(true);
+  }
+  if (loaded) {
+    return (
+      <div className="WeatherForecast">
+        <div className="row">
+          <div className="col">
+            <WeatherForecastDay data={forecast[0]} />
+          </div>
+        </div>
+      </div>
+    );
+  } else {
+    let apiKey = "ft2ff28777530dba3dddb311o0464bef";
+    let longitude = props.coordinates.longitude;
+    let latitude = props.coordinates.latitude;
 
-    function handleResponse(response) {
-        console.log(response.data);
-        setLoaded(response.data)
-    }
-    
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${longitude}&lat=${latitude}&key=${apiKey}&units=mmetric`;
 
-    
-
-    if (loaded){
-        return (
-            <div className="WeatherForecast">
-                <div className="row">
-                    <div className="col">
-                        <div className="WeatherForecast-day">Tue</div>
-                        <Weathericon code="clear_sky_day" size={36} />
-                        <div className="WeatherForecast-temperature">
-                            <span className="WeatherForecast-temperature-max">19°</span>
-                            <span className="WeatherForecast-temperature-min">10°</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
-}
-else {
-    
-     let apiKey = "ft2ff28777530dba3dddb311o0464bef"
-    let longitude = props.coordinates.longitude
-    let latitude= props.coordinates.latitude
-
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${longitude}&lat=${latitude}&key=${apiKey}`;
-       axios.get(apiUrl).then(handleResponse);
-   
-        return null
-        
-    }
+    axios.get(apiUrl).then(handleResponse);
+  }
 }
