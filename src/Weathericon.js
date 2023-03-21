@@ -3,7 +3,7 @@ import ReactAnimatedWeather from "react-animated-weather";
 
 export default function Weathericon(props) {
   const codeMapping = {
-    clear_sky_day: "CLEAR_DAY",
+    "clear-sky-day": "CLEAR_DAY",
     "clear-sky-night": "CLEAR_NIGHT",
     "few-clouds-day": "CLOUDY",
     "few-clouds-night": "CLOUDY",
@@ -11,7 +11,9 @@ export default function Weathericon(props) {
     "scattered-clouds-night": "RAIN",
     "broken-clouds-day": "PARTLY_CLOUDY_NIGHT",
     "broken-clouds-night": "PARTLY_CLOUDY_NIGHT",
-    "shower-rain- day": "SLEET",
+    "shower-rain-day": "SLEET",
+    "shower-rain-night": "SLEET",
+    "rain-day": "RAIN",
     "rain-night": "RAIN",
     "thunderstorm-day": "WIND",
     "thunderstorm-night": "WIND",
